@@ -64,7 +64,7 @@ label travel:
 
 label arival:
     "The market's just barely started, people are hanging up streamers and gathering firewood all merry like"
-    "Gods you've missed festivals, ever since your dads accident you'd hardly got a days rest"
+    "You've missed festivals, ever since your dads accident you'd hardly got a days rest"
     "What was even worse was seeing your siblings faces when you told them they couldn't go"
     "It hurt you not being able to go but you were used to being kicked down, them on the other hand"
     "Gods you hated letting them down"
