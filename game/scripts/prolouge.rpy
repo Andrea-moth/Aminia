@@ -1,5 +1,7 @@
-define slaver1 = Character("Illian")
-define slaver2 = Character("Cimile")
+define slaver1 = Character("Illian", color="#6d1d24")
+define slaver2 = Character("Cimile", color="#6d1d24")
+define character_name = "Jamie"
+define main_character = Character("[character_name]")
 
 label prolouge:
     "With a rough jolt and a splash of cold water you're roused from your sleep"
@@ -38,12 +40,12 @@ label travel:
     "Grabbing the little possesions you have, you mount up with some difficulty and you're quickly on your way"
     "You struggle suprisingly little given it's your first time, falling only a little behind"
     "Thankfully the slavers seem content to ride ahead and chat between themselves"
-    "Nor are you complaining, it's quite relaxing to have some time to yourself"
+    "Nor are you complaining, it's quite relaxing to have some time to yourself, especially after being forced to walk barefooted behind the slavers"
 
     ""
 
     "As the road winds on you deeply consider running off deep into the woods, never to be seen again, but you're snapped back to reason as you almost fall of your horse"
-    "Eventally you fall into the rythm of it and stand feeling more confident, as bad as your prediciment is you're glad to have had the oppertunity to ride a horse"
+    "Eventally you fall into the rythm of it and stand feeling more confident, as bad as your prediciment is you're quite glad to have had the oppertunity to ride a horse"
 
     ""
 
@@ -89,47 +91,58 @@ label arival:
     "You remember the time you told your mom, how defeated she looked and how she made you swear never to talk about it again"
     "The time you got beaten up by the guys in your village for wearing a dress"
 
-    "Kneeling there by the river, shackled and owned, barely considered human anymore. Every last bit of it comes flooding back"
+    "Nothing could have prepared you for how much their would have hurt"
+    "Kneeling there by the river, shackled and owned, and barely considered human anymore. Every last bit of it comes flooding back"
 
     ""
 
     "After a while the tears start to feel hollow"
-    "Eventually the fear starts to fade away until you're left with anger"
-    "Some rich snob is going to buy me and once we're free of the market they're going to have to watch their back"
-
-    ""
-
-    "That, that helps"
-    "As you finish washing up your mind if filled with thoughts of escape and as your determination grows your despiration shrinks"
-    "When it comes time to head back you have to hide the smile growing on your face"
-
-    ""
+    "Picking up one of the rocks lying on the river bed you toss it far into the woods, watching it roll into the bushes"
+    "Hugging your knees to your chest you finally start to feel somewhat calmer"
     
+    ""
+
+    "Cupping your hands you scoop some water onto your face, it takes quite a bit of scrubbing but eventually you start to feel somewhat clean"
+    "You try to fix your hair but there's not much you can do other than smooth it down"
+    
+    main_character "\"Hey it's something\""
+    
+    "Hearing your voice almost makes you tear up again, something just feels off about it"
+    "Promising yourself that you won't speak unless you have to you"
+    "Doing your best to keep it together you walk back to the auction"
+    
+    ""
+
 label auction:
-    "Revenge must be patient"
-    "Sitting in the corner of the market, watching over the preperations waiting for the auction to start"
-    "Its taken quite a while, but despite everything that's happened you don't feel nervous"
+    "Sitting in the corner of the market, hugging your stomach, waiting for the inevitable one of the marketgoers approaches you"
 
-    ""
+    "{color=#FF9B55}Marketgoer{/color}" "Are you alright mister, you look sad"
+
+    "\"Mister\", gods it stings hearing that"
+    "Looking up at them, they look about the same age as your youngest sister, you give them a reasuring smile"
+
+    main_character "I'm fine, just a bit sick is all"
+    "{color=#FF9B55}Marketgoer{/color}" "Want me to get you some water"
+    main_character "No no, it's okay, I just need to be by myself for a bit"
+    "{color=#FF9B55}Marketgoer{/color}" "Okay, hope you feel better soon"
     
-    "Lost in though planning your escape you barely notice the auction starting until one of the slavers drags you over"
-    "Taking one last look over the market you make your way over, ready, you hope, for what's to come next"
+    "Watching them walk off all happily just makes your situation feel all the bleaker"
 
     ""
 
-    "You're the first up, each step feels heavy but step by step you make your way onto the stage"
+    "You're the first one up, each step feels heavy but step by step you make your way onto the stage"
     "Its terrifying looking out on the crowd, seeing just how many people regard you as nothing less than an object"
 
     ""
 
-    "Auction master" "And the bidding starts at two shillings, two shillings for this lovely young lad, quite strong by the look of him too"
+    "{color=00008b}Auction master{/color}" "And the bidding starts at two shillings, two shillings for this lovely young lad, quite strong by the look of him too"
     "A few hands start going up but it's very clear people aren't that interested in the auction yet"
     "Noting down the bids he turns to you clearly disapointed by crowds reaction"
-    "Auction master" "Lets make things more interesting then"
+    "{color=00008b}Auction master{/color}" "Lets make things more interesting then"
     "Crouching down he picks up some staws from the ground"
-    "Auction master" "Ten shillings for the kid, but only if you draw the longest straw"
+    "{color=00008b}Auction master{/color}" "Ten shillings for the kid, but only if you draw the longest straw"
     "He hands you the straws gesturing to the crowd"
-    "Auction master" "Go on then"
+    "{color=00008b}Auction master{/color}" "Go on then"
 
     "The dramatic end, for now"
 
