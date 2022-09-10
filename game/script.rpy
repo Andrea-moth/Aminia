@@ -10,3 +10,6 @@
         "I'm actually not okay with that at all":
             "Well thanks for coming, hope you find what you're looking for"
             return
+
+label not_written:
+    "Sorry that's not written yet"

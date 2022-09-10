@@ -107,9 +107,8 @@ label arival:
     
     main_character "\"Hey it's something\""
     
-    "Hearing your voice almost makes you tear up again, something just feels off about it"
-    "Promising yourself that you won't speak unless you have to you"
-    "Doing your best to keep it together you walk back to the auction"
+    "Hearing your voice almost makes you tear up again, something just feels so off about it"
+    "Holding it in you promise yourself not to speak again unless you absaloutly need to"
     
     ""
 
@@ -144,10 +143,29 @@ label auction:
     "He hands you the straws gesturing to the crowd"
     "{color=00008b}Auction master{/color}" "Go on then"
 
-    "The dramatic end, for now"
+    "Hesitating for a momement you grab the straws before heading into the crowd"
+    "Your ma had always taught you to take advantage of the little you have"
+    "Sure she may having been talking about cooking, but she was definatly right"
+    "As you approach the crowd you do your best to try and find the longest straw in the bunch"
+    "Finding it just as you reach the crowd you carefully shuffling the straws"
+    "Three people stand out in particular from the crowd"
+    "A rich noblewoman sat near the back"
+    "An (undefined)"
+    "And a (None)"
 
-    return
-
-
-label castlearrival:
-    "(This hasn't been written yet)"
+    menu:
+        "The freedom to chose how to be enslaved is no choice at all"
+        "The noblewoman":
+            jump nobeltravel
+        "undefined":
+            call not_written
+        "None":
+            call not_written
+        "You can't decide":
+            define choice = renpy.random.choice(["nobel", "undefined", "none"])
+            if choice == "nobel": 
+                jump nobeltravel
+            elif choice == "undefined": 
+                call not_written
+            elif choice == "none": 
+                call not_written
