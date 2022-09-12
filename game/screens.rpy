@@ -248,7 +248,7 @@ screen quick_menu():
 
             yalign 0
 
-            textbutton _("World Info") action ShowMenu("world_info")
+            textbutton _("Journal") action ShowMenu("Journal")
             textbutton _("Prefs") action ShowMenu('preferences')
 
 
@@ -471,6 +471,37 @@ screen game_menu(title, scroll=None, yinitial=0.0):
         key "game_menu" action ShowMenu("main_menu")
 
 
+## Journal screen ################################################################
+##
+## This screen shows the worlds current state as well as small details about the main character 
+
+screen Journal():
+    add gui.journal_background
+    add gui.journal_sidescreen
+
+    vbox:
+        textbutton "1":
+            xsize 336
+            text_xalign 0.5
+            action NullAction()
+        textbutton "2":
+            xsize 336
+            text_xalign 0.5
+            action NullAction()
+        textbutton "3":
+            xsize 336
+            text_xalign 0.5
+            action NullAction()
+        textbutton "4":
+            xsize 336
+            text_xalign 0.5
+            action NullAction()
+        textbutton "Return":
+            xsize 336
+            text_xalign 0.5
+            action Return()
+
+    
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
 style game_menu_content_frame is empty
@@ -739,7 +770,15 @@ screen preferences():
 
                     label _("Text Speed")
 
-                    bar value Preference("text speed")
+                    bar value Preference("text speed")                    
+
+                    vbox:
+                        style_prefix "radio"
+                        label _("Font")
+                        textbutton _("Regular"):
+                            action Preference("font transform", "DejaVuSans")
+                        textbutton _("Dyslexia (Text Clipping)"):
+                            action Preference("font transform", "dyslexia")
 
 #                    label _("Auto-Forward Time")
 

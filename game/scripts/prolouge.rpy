@@ -158,14 +158,14 @@ label auction:
         "The noblewoman":
             jump nobeltravel
         "undefined":
-            call not_written
+            call not_written from _call_not_written
         "None":
-            call not_written
+            call not_written from _call_not_written_1
         "You can't decide":
             define choice = renpy.random.choice(["nobel", "undefined", "none"])
             if choice == "nobel": 
                 jump nobeltravel
             elif choice == "undefined": 
-                call not_written
+                call not_written from _call_not_written_2
             elif choice == "none": 
-                call not_written
+                call not_written from _call_not_written_3
