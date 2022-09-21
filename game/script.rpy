@@ -1,4 +1,10 @@
-﻿label start:
+﻿define location = "unknown"
+
+define character_name = "Jamie"
+define pov = Character("[character_name]")
+
+
+label start:
     "Hi, welcome to Amina, please do not ask why I called it that"
 
     "Quick trigger warning, this game will contain some pretty heavy stuff if you're not okay with that it's best not to play"

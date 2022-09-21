@@ -249,8 +249,7 @@ screen quick_menu():
             yalign 0
 
             textbutton _("Journal") action ShowMenu("Journal")
-            textbutton _("Prefs") action ShowMenu('preferences')
-
+            textbutton _("Prefs") action ShowMenu('preferences') 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
@@ -476,8 +475,22 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 ## This screen shows the worlds current state as well as small details about the main character 
 
 screen Journal():
-    add gui.journal_background
+    default current_map = "gui/journal/[location]_map.png" if not location == "unknown" else gui.journal_worldmap
+
+    add current_map
+
     add gui.journal_sidescreen
+
+    if not location == "unknown":
+        hbox xalign 1.0:
+            imagebutton:
+                idle "gui/journal/compass.png"
+                if current_map == gui.journal_worldmap:
+                    hover "gui/journal/compass_local.png"
+                else:
+                    hover "gui/journal/compass_world.png"
+                xalign 1
+                action [ToggleScreenVariable("current_map", true_value="gui/journal/[location]_map.png", false_value=gui.journal_worldmap), renpy.restart_interaction]
 
     vbox:
         textbutton "1":
@@ -489,10 +502,6 @@ screen Journal():
             text_xalign 0.5
             action NullAction()
         textbutton "3":
-            xsize 336
-            text_xalign 0.5
-            action NullAction()
-        textbutton "4":
             xsize 336
             text_xalign 0.5
             action NullAction()
@@ -750,12 +759,12 @@ screen preferences():
                         textbutton _("Window") action Preference("display", "window")
                         textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
-#                vbox:
-#                    style_prefix "check"
-#                    label _("Skip")
-#                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-#                    textbutton _("After Choices") action Preference("after choices", "toggle")
-#                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                vbox:
+                    style_prefix "check"
+                    label _("Skip")
+                    textbutton _("Unseen Text") action Preference("skip", "toggle")
+                    textbutton _("After Choices") action Preference("after choices", "toggle")
+                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
@@ -767,34 +776,51 @@ screen preferences():
                 box_wrap True
 
                 vbox:
+                    label _("Text")
 
-                    label _("Text Speed")
+                    text _("Text Speed")
 
-                    bar value Preference("text speed")                    
+                    null height (1 * gui.pref_spacing)
+
+                    bar value Preference("text speed")
+
+                    null height (2 * gui.pref_spacing)
+
+                    text _("Auto-Forward Time")
+
+                    null height (1 * gui.pref_spacing)
+
+                    bar value Preference("auto-forward time")
+
+                    null height (2 * gui.pref_spacing)
 
                     vbox:
                         style_prefix "radio"
-                        label _("Font")
+                        text _("Font")
                         textbutton _("Regular"):
                             action Preference("font transform", "DejaVuSans")
-                        textbutton _("Dyslexia (Text Clipping)"):
-                            action Preference("font transform", "dyslexia")
-
-#                    label _("Auto-Forward Time")
-
-#                    bar value Preference("auto-forward time")
+                        textbutton _("Dyslexia"):
+                            action Preference("font transform", "opendyslexic")
 
                 vbox:
 
+                    label _("Audio")
+
                     if config.has_music:
-                        label _("Music Volume")
+                        text _("Music Volume")
+
+                        null height (1 * gui.pref_spacing)
 
                         hbox:
                             bar value Preference("music volume")
 
+                    null height (2 * gui.pref_spacing)
+
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        text _("Sound Volume")
+
+                        null height (1 * gui.pref_spacing)
 
                         hbox:
                             bar value Preference("sound volume")
@@ -802,9 +828,12 @@ screen preferences():
                             if config.sample_sound:
                                 textbutton _("Test") action Play("sound", config.sample_sound)
 
+                    null height (2 * gui.pref_spacing)
 
                     if config.has_voice:
-                        label _("Voice Volume")
+                        text _("Voice Volume")
+
+                        null height (1 * gui.pref_spacing)
 
                         hbox:
                             bar value Preference("voice volume")

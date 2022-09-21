@@ -1,13 +1,9 @@
-define slaver1 = Character("Illian", color="#6d1d24")
-define slaver2 = Character("Cimile", color="#6d1d24")
-define character_name = "Jamie"
-define main_character = Character("[character_name]")
-
 label prolouge:
+    $ location = "prolouge"
     "With a rough jolt and a splash of cold water you're roused from your sleep"
     "Sitting up you blink the tiredness from you eyes, streching your arms"
 
-    slaver1 "Ge'up, t' markets opening soon, 'nd trust me if we don't get there now t'ere's no chance someones gonna buy your sorry arse."
+    "{color=#6d1d24}Illian{/colour}" "Ge'up, t' markets opening soon, 'nd trust me if we don't get there now t'ere's no chance someones gonna buy your sorry arse."
 
     "It takes you a moment to wake up properly, but the hope of finally leaving the slavers is more than enough to hurry you along"
     ""
@@ -26,16 +22,16 @@ label flashback:
 label travel:
     "Your train of thought is completely broken as the slavers mount their horses and you brace yourself for the road ahead"
     
-    slaver2 "Grab yourself a horse and follow along"
+    "{color=#6d1d24}Cimile{/color}" "Grab yourself a horse and follow along"
     
     "You stand there stunned for a bit wondering why they're not forcing you to walk"
 
-    slaver2 "Quickly, no one's going to want to buy you if you're all tired from the road"
-    slaver1 "Ya d'know how to ride a ho'rse don't ya?"
+    "{color=#6d1d24}Cimile{/color}" "Quickly, no one's going to want to buy you if you're all tired from the road"
+    "{color=#6d1d24}Illian{/colour}" "Ya d'know how to ride a ho'rse don't ya?"
 
     "You barely know anything about horses, but you nod your head anyway not wanting to annoy them"
 
-    slaver1 "Good, now 'op on, lets get gone"
+    "{color=#6d1d24}Illian{/colour}" "Good, now 'op on, lets get gone"
 
     "Grabbing the little possesions you have, you mount up with some difficulty and you're quickly on your way"
     "You struggle suprisingly little given it's your first time, falling only a little behind"
@@ -75,8 +71,8 @@ label arival:
 
     "The slavers head over to the base of a pine near the edge of the clearing and dismount"
 
-    slaver2 "Right we've got a few minutes until the markets open, best clean yourself up a bit"
-    slaver2 "Oh and don't think about running, they've got mages protecting the place"
+    "{color=#6d1d24}Cimile{/color}" "Right we've got a few minutes until the markets open, best clean yourself up a bit"
+    "{color=#6d1d24}Cimile{/color}" "Oh and don't think about running, they've got mages protecting the place"
 
     "Resigned to it by this point you head over to the nearby river, pulling your sleeves up on the way"
 
@@ -105,7 +101,7 @@ label arival:
     "Cupping your hands you scoop some water onto your face, it takes quite a bit of scrubbing but eventually you start to feel somewhat clean"
     "You try to fix your hair but there's not much you can do other than smooth it down"
     
-    main_character "\"Hey it's something\""
+    pov "\"Hey it's something\""
     
     "Hearing your voice almost makes you tear up again, something just feels so off about it"
     "Holding it in you promise yourself not to speak again unless you absaloutly need to"
@@ -120,9 +116,9 @@ label auction:
     "\"Mister\", gods it stings hearing that"
     "Looking up at them, they look about the same age as your youngest sister, you give them a reasuring smile"
 
-    main_character "I'm fine, just a bit sick is all"
+    pov "I'm fine, just a bit sick is all"
     "{color=#FF9B55}Marketgoer{/color}" "Want me to get you some water"
-    main_character "No no, it's okay, I just need to be by myself for a bit"
+    pov "No no, it's okay, I just need to be by myself for a bit"
     "{color=#FF9B55}Marketgoer{/color}" "Okay, hope you feel better soon"
     
     "Watching them walk off all happily just makes your situation feel all the bleaker"
@@ -147,7 +143,7 @@ label auction:
     "Your ma had always taught you to take advantage of the little you have"
     "Sure she may having been talking about cooking, but she was definatly right"
     "As you approach the crowd you do your best to try and find the longest straw in the bunch"
-    "Finding it just as you reach the crowd you carefully shuffling the straws"
+    "Finding it just as you reach the crowd you carefully shuffle the straws"
     "Three people stand out in particular from the crowd"
     "A rich noblewoman sat near the back"
     "An (undefined)"
@@ -156,16 +152,16 @@ label auction:
     menu:
         "The freedom to chose how to be enslaved is no choice at all"
         "The noblewoman":
-            jump nobeltravel
+            jump nobel
         "undefined":
-            call not_written from _call_not_written
+            jump not_written 
         "None":
-            call not_written from _call_not_written_1
+            jump not_written
         "You can't decide":
-            define choice = renpy.random.choice(["nobel", "undefined", "none"])
-            if choice == "nobel": 
-                jump nobeltravel
-            elif choice == "undefined": 
-                call not_written from _call_not_written_2
-            elif choice == "none": 
-                call not_written from _call_not_written_3
+            define rand = renpy.random.choice(["nobel", "undefined", "none"])
+            if rand == "nobel": 
+                jump not_written
+            elif rand == "undefined": 
+                jump not_written 
+            elif rand == "none": 
+                jump not_written 
