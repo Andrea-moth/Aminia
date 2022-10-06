@@ -474,23 +474,89 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 ##
 ## This screen shows the worlds current state as well as small details about the main character 
 
+transform fade:
+    on show:
+        alpha 0.0
+        linear 0.5 alpha 1.0
+    on update:
+        alpha 1.0
+        linear 0.25 alpha 0.5
+        linear 0.4 alpha 1.0
+    on hide:
+        alpha 1.0
+        linear 0.5 alpha 0.0
+
+#screen Journal():
+#    default use_worldmap = False
+#
+#    if location != "unknown" and not use_worldmap:
+#        if location == "prolouge":
+#            use prolouge_map
+#    else:
+#        add gui.journal_worldmap
+#
+#    add gui.journal_sidescreen
+#
+#    if not location == "unknown":
+#        hbox xalign 1.0:
+#            imagebutton:
+#                idle "gui/journal/compass.png"
+#                if use_worldmap:
+#                    hover "gui/journal/compass_local.png"
+#                else:
+#                    hover "gui/journal/compass_world.png"
+#                xalign 1
+#                action [ToggleScreenVariable("use_worldmap"), renpy.restart_interaction]
+
+#    vbox:
+#        textbutton "1":
+#            xsize 336
+#            text_xalign 0.5
+#            action NullAction()
+#        textbutton "2":
+#            xsize 336
+#            text_xalign 0.5
+#            action NullAction()
+#        textbutton "3":
+#            xsize 336
+#            text_xalign 0.5
+#            action NullAction()
+#        textbutton "Return":
+#            xsize 336
+#            text_xalign 0.5
+#            action Return()
+
 screen Journal():
-    default current_map = "gui/journal/[location]_map.png" if not location == "unknown" else gui.journal_worldmap
+    default current_map = location
 
-    add current_map
-
-    add gui.journal_sidescreen
-
-    if not location == "unknown":
+    if current_map == "unknown":
+        frame:
+            xpadding 0 
+            ypadding 0
+            
+            use world_map 
+            at fade
+    else:
+        frame:
+            xpadding 0
+            ypadding 0 
+            if current_map == "prolouge":
+                use prolouge_map
+                at fade
+            elif current_map == "world":
+                use world_map
+                at fade
         hbox xalign 1.0:
             imagebutton:
                 idle "gui/journal/compass.png"
-                if current_map == gui.journal_worldmap:
+                if current_map == "world":
                     hover "gui/journal/compass_local.png"
                 else:
                     hover "gui/journal/compass_world.png"
                 xalign 1
-                action [ToggleScreenVariable("current_map", true_value="gui/journal/[location]_map.png", false_value=gui.journal_worldmap), renpy.restart_interaction]
+                action [ToggleScreenVariable("current_map", true_value="world", false_value=location), renpy.restart_interaction]
+
+    add gui.journal_sidescreen
 
     vbox:
         textbutton "1":
@@ -510,6 +576,13 @@ screen Journal():
             text_xalign 0.5
             action Return()
 
+screen world_map():
+    add gui.journal_worldmap
+
+screen prolouge_map():
+    default current_map = "gui/journal/prolouge_map.png"
+    ## ToDo imagemap stuff
+    add current_map
     
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
