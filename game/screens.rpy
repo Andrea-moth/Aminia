@@ -486,83 +486,27 @@ transform fade:
         alpha 1.0
         linear 0.5 alpha 0.0
 
-#screen Journal():
-#    default use_worldmap = False
-#
-#    if location != "unknown" and not use_worldmap:
-#        if location == "prolouge":
-#            use prolouge_map
-#    else:
-#        add gui.journal_worldmap
-#
-#    add gui.journal_sidescreen
-#
-#    if not location == "unknown":
-#        hbox xalign 1.0:
-#            imagebutton:
-#                idle "gui/journal/compass.png"
-#                if use_worldmap:
-#                    hover "gui/journal/compass_local.png"
-#                else:
-#                    hover "gui/journal/compass_world.png"
-#                xalign 1
-#                action [ToggleScreenVariable("use_worldmap"), renpy.restart_interaction]
-
-#    vbox:
-#        textbutton "1":
-#            xsize 336
-#            text_xalign 0.5
-#            action NullAction()
-#        textbutton "2":
-#            xsize 336
-#            text_xalign 0.5
-#            action NullAction()
-#        textbutton "3":
-#            xsize 336
-#            text_xalign 0.5
-#            action NullAction()
-#        textbutton "Return":
-#            xsize 336
-#            text_xalign 0.5
-#            action Return()
-
 screen Journal():
+    default displayed = "map"
     default current_map = location
 
-    if current_map == "unknown":
-        frame:
-            xpadding 0 
-            ypadding 0
-            
-            use world_map 
+    frame:
+        xpadding 0
+        ypadding 0
+        if displayed == "map":
+            use Map(current_map)
             at fade
-    else:
-        frame:
-            xpadding 0
-            ypadding 0 
-            if current_map == "prolouge":
-                use prolouge_map
-                at fade
-            elif current_map == "world":
-                use world_map
-                at fade
-        hbox xalign 1.0:
-            imagebutton:
-                idle "gui/journal/compass.png"
-                if current_map == "world":
-                    hover "gui/journal/compass_local.png"
-                else:
-                    hover "gui/journal/compass_world.png"
-                xalign 1
-                action [ToggleScreenVariable("current_map", true_value="world", false_value=location), renpy.restart_interaction]
+        elif displayed == "diary":
+            use Diary
+            at fade
 
     add gui.journal_sidescreen
 
     vbox:
-        textbutton "1":
+        textbutton "Diary":
             xsize 336
             text_xalign 0.5
-            action NullAction()
+            action [ToggleScreenVariable("displayed", true_value="diary", false_value="map"), renpy.restart_interaction]
         textbutton "2":
             xsize 336
             text_xalign 0.5
@@ -576,14 +520,40 @@ screen Journal():
             text_xalign 0.5
             action Return()
 
+screen Map(current_map):
+    if current_map == "unknown":
+        use world_map
+    else:
+        if current_map == "prolouge":
+            use prolouge_map
+        elif current_map == "world":
+            use world_map
+        hbox xalign 1.0:
+            imagebutton:
+                idle "gui/journal/compass.png"
+                if current_map == "world":
+                    hover "gui/journal/compass_local.png"
+                else:
+                    hover "gui/journal/compass_world.png"
+                xalign 1
+                action [ToggleScreenVariable("current_map", true_value="world", false_value=location), renpy.restart_interaction]
+
+screen Diary():
+    hbox:
+        text _("Diary")
+        text _("Diary")
+        text _("Diary")
+        text _("Diary")
+        text _("Diary in progress")
+        text _(" Also for some reason I can't align this, please send help")
+
 screen world_map():
     add gui.journal_worldmap
 
 screen prolouge_map():
-    default current_map = "gui/journal/prolouge_map.png"
+    add "gui/journal/prolouge_map.png"
     ## ToDo imagemap stuff
-    add current_map
-    
+
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
 style game_menu_content_frame is empty
