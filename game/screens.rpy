@@ -278,7 +278,6 @@ style quick_button_text:
 ## to other menus, and to start the game.
 
 screen navigation():
-
     vbox:
         style_prefix "navigation"
 
@@ -289,7 +288,7 @@ screen navigation():
 
         if _in_replay:
 
-            textbutton _("End Replay") action EndReplay(confirm=True)
+            textbutton _("End Replay") action EndReplay(confirm=True)#
 
         elif not main_menu:
 
@@ -320,7 +319,6 @@ screen navigation():
             ## Web.
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
-
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
@@ -338,32 +336,33 @@ style navigation_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
+default persistent.characters = [{"id": "9376e92e-6989-40d4-9438-6c9f02c9a202-LT1", "name": "frejya"}, None, None, None]
+
 screen main_menu():
+    #default persistant.
 
     ## This ensures that any other menu screen is replaced.
     tag menu
 
     add gui.main_menu_background
 
-    ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
-
-    ## The use statement includes another screen inside this one. The actual
-    ## contents of the main menu are in the navigation screen.
-    use navigation
-
-    if gui.show_name:
-
-        vbox:
-            style "main_menu_vbox"
-
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
-
+    vbox:
+        xpos 0.5
+        xalign 0.5
+        ypos 0.7
+        yalign 1
+        textbutton _("Start"):
+            xalign 0.5
+            action Start()
+#screen load_screen():
+#        hbox:
+#            for save_file in persistent.characters:
+#                if save_file:
+#                    textbutton save_file["name"]:
+#                        action FileLoad(save_file["id"])
+#                else:
+#                    textbutton _("New game"):
+#                        action NullAction()
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
@@ -404,7 +403,6 @@ style main_menu_version:
 ## transcluded (placed) inside it.
 
 screen game_menu(title, scroll=None, yinitial=0.0):
-
     style_prefix "game_menu"
 
     if main_menu:
@@ -469,7 +467,6 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
 
-
 ## Journal screen ################################################################
 ##
 ## This screen shows the worlds current state as well as small details about the main character 
@@ -499,10 +496,15 @@ screen Journal():
         elif displayed == "diary":
             use Diary
             at fade
+        elif displayed == "world_info":
+            use World_info
+            at fade
 
     add gui.journal_sidescreen
-
+    
     vbox:
+        spacing 200
+        yalign 0.5
         textbutton "Diary":
             xsize 336
             text_xalign 0.5
@@ -510,7 +512,7 @@ screen Journal():
         textbutton "2":
             xsize 336
             text_xalign 0.5
-            action NullAction()
+            action [ToggleScreenVariable("displayed", true_value="world_info", false_value="map"), renpy.restart_interaction]
         textbutton "3":
             xsize 336
             text_xalign 0.5
@@ -519,6 +521,22 @@ screen Journal():
             xsize 336
             text_xalign 0.5
             action Return()
+
+screen Diary():
+    frame:
+        xpos 340
+        vbox:
+            text _("Diary in progress")
+        hbox:
+            yalign 1.0
+            xalign 0.5
+            textbutton _("Previous")
+            textbutton _("Next")
+
+screen World_info():
+    frame:
+        hbox:
+            text _("World info in progress")
 
 screen Map(current_map):
     if current_map == "unknown":
@@ -538,22 +556,13 @@ screen Map(current_map):
                 xalign 1
                 action [ToggleScreenVariable("current_map", true_value="world", false_value=location), renpy.restart_interaction]
 
-screen Diary():
-    hbox:
-        text _("Diary")
-        text _("Diary")
-        text _("Diary")
-        text _("Diary")
-        text _("Diary in progress")
-        text _(" Also for some reason I can't align this, please send help")
-
 screen world_map():
     add gui.journal_worldmap
 
 screen prolouge_map():
     add "gui/journal/prolouge_map.png"
     ## ToDo imagemap stuff
-
+    
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
 style game_menu_content_frame is empty
@@ -655,21 +664,16 @@ style about_label_text:
 ## www.renpy.org/doc/html/screen_special.html#load
 
 screen save():
-
     tag menu
 
     use file_slots(_("Save"))
 
-
 screen load():
-
     tag menu
 
     use file_slots(_("Load"))
 
-
 screen file_slots(title):
-
     default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
 
     use game_menu(title):
@@ -742,7 +746,6 @@ screen file_slots(title):
                     textbutton "[page]" action FilePage(page)
 
                 textbutton _(">") action FilePageNext()
-
 
 style page_label is gui_label
 style page_label_text is gui_label_text

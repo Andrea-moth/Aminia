@@ -1,21 +1,28 @@
-﻿define location = "unknown"
+﻿define gap = Character(None, what_xalign=0.5)
 
-define character_name = "Jamie"
-define pov = Character("[character_name]")
+define location = "unknown"
 
+define char_name = "Jamie"
+define char =  Character("[char_name]")
 
-label start:
-    "Hi, welcome to Amina, please do not ask why I called it that"
+label splashscreen:
+    "When making this game I wanted to stretch the limits of renpy"
+    "Please expect keybinds to be different, different saving systems and so on"
 
-    "Quick trigger warning, this game will contain some pretty heavy stuff if you're not okay with that it's best not to play"
+    "Also quick trigger warning, this game will contain some pretty heavy stuff if you're not okay with that it's best not to play"
     menu:
-        "If you can't handle the general themes of slavery and a mild bit of violence I could always skip it for you"
+        "TW: Slavery, Racism (fantasy) and other such horrible stuff"
         "I can handle it":
-            "Let's get to it then"
-            jump prolouge
+            return 
         "I'm actually not okay with that at all":
             "Well thanks for coming, hope you find what you're looking for"
-            return
+            $ renpy.quit()
 
+label quit:
+    return
+
+label start:
+    jump prolouge
+    
 label not_written:
     "Sorry that's not written yet"
