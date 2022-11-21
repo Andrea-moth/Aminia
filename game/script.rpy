@@ -6,10 +6,7 @@ define char_name = "Jamie"
 define char =  Character("[char_name]")
 
 label splashscreen:
-    "When making this game I wanted to stretch the limits of renpy"
-    "Please expect keybinds to be different, different saving systems and so on"
-
-    "Also quick trigger warning, this game will contain some pretty heavy stuff if you're not okay with that it's best not to play"
+    "Quick trigger warning, this game will contain some pretty heavy stuff if you're not okay with that it's best not to play"
     menu:
         "TW: Slavery, Racism (fantasy) and other such horrible stuff"
         "I can handle it":
